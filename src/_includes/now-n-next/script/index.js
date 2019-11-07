@@ -173,7 +173,9 @@ function update() {
   const now = getNow();
 
   const currentIndex = getCurrentScheduleIndex(now);
-  const nowItem = schedule[currentIndex] || { title: 'Starting soon!' };
+  const nowItem = schedule[currentIndex] || {
+    title: 'Getting everything ready…',
+  };
   const nextItem = schedule
     .slice(currentIndex + 1)
     .find(item => item.livestreamed);
