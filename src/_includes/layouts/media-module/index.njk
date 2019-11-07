@@ -4,10 +4,12 @@
 {% css page, mediaCSS %}
 
 <section class="{% block moduleClass %}{% className moduleCSS, 'root' %}{% endblock %} {% className mediaCSS, 'root' %}">
+  {% block before %}{% endblock %}
   <div class="{% className mediaCSS, 'main' %}">
     {% block main %}{% endblock %}
   </div>
   <div class="{% className mediaCSS, 'media' %}">
     {% block media %}{% endblock %}
   </div>
+  {% block after %}{% endblock %}
 </section>

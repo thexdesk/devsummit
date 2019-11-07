@@ -1,0 +1,41 @@
+{% extends "layouts/media-module/index.njk" %}
+
+{% block moduleClass %}{% className moduleCSS, 'root-alt' %}{% endblock %}
+
+{%- set nowNextCSS = "/_includes/now-n-next/style.css" -%}
+
+{% block before %}
+  <script>
+    self.basicSchedule = {% json collections.jsScheduleBasic %};
+    (() => {
+      const now = Date.now();
+      const lowerLimit = basicSchedule[0].start - (1000 * 60 * 60 * 4);
+      const upperLimit = basicSchedule.slice(-1)[0].end + (1000 * 60 * 60 * 4);
+
+      if (now < lowerLimit || now > upperLimit) {
+        //document.currentScript.parentNode.style.display = 'none';
+      }
+    })();
+  </script>
+{% endblock %}
+
+{% block main %}
+  {% css page, nowNextCSS %}
+  <p>Hi</p>
+{% endblock %}
+
+{% block media %}
+  {%- set utilsCSS = "/_includes/utils.css" -%}
+  {% css page, utilsCSS %}
+  <div class="{% className utilsCSS, 'aspect-ratio' %}" style="--aspect-ratio: calc(16/9)">
+    <iframe class="{% className utilsCSS, 'media-fill' %}" src="https://www.youtube.com/embed/XZcmtqL4JPI" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  </div>
+{% endblock %}
+
+{% block after %}
+  <section class="{% className nowNextCSS, 'up-next' %}">
+    <h1>Up next ></h1>
+    <div><a href="#">HTML isn't done!</a></div>
+    <div>In 22 miunutes</div>
+  </section>
+{% endblock %}
