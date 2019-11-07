@@ -181,7 +181,8 @@ function update() {
   onNowEl.innerHTML = updateOnNow(nowItem);
   upNextEl.innerHTML = updateOnNext(nextItem);
 
-  // TODO: return next update time
+  if (!schedule[currentIndex + 1]) return;
+  setTimeout(() => update(), schedule[currentIndex + 1].start - now);
 }
 
 (() => {
