@@ -1,41 +1,38 @@
-{% extends "layouts/media-module/index.njk" %}
-
-{% block moduleClass %}{% className moduleCSS, 'root-alt' %}{% endblock %}
-
+{%- set moduleCSS = "/_includes/module.css" -%}
+{% css page, moduleCSS %}
+{%- set mediaCSS = "/_includes/layouts/media-module/style.css" -%}
+{% css page, mediaCSS %}
+{%- set speakerCSS = "/_includes/speakers.css" -%}
+{% css page, speakerCSS %}
 {%- set nowNextCSS = "/_includes/now-n-next/style.css" -%}
+{% css page, nowNextCSS %}
 
-{% block before %}
+<section class="{% className moduleCSS, 'root' %} {% className mediaCSS, 'root' %} {% className nowNextCSS, 'root' %}">
   <script>
     self.basicSchedule = {% json collections.jsScheduleBasic %};
     (() => {
-      const now = Date.now();
+      const now = Number(new URL(location).searchParams.get('now')) || Date.now();
       const lowerLimit = basicSchedule[0].start - (1000 * 60 * 60 * 4);
       const upperLimit = basicSchedule.slice(-1)[0].end + (1000 * 60 * 60 * 4);
 
-      if (now < lowerLimit || now > upperLimit) {
-        //document.currentScript.parentNode.style.display = 'none';
+      self.showNowNext = (now > lowerLimit && now < upperLimit);
+
+      if (showNowNext) {
+        document.currentScript.parentNode.style.visibility = 'hidden';
+      } else {
+        document.currentScript.parentNode.style.display = 'none';
       }
     })();
   </script>
-{% endblock %}
-
-{% block main %}
-  {% css page, nowNextCSS %}
-  <p>Hi</p>
-{% endblock %}
-
-{% block media %}
-  {%- set utilsCSS = "/_includes/utils.css" -%}
-  {% css page, utilsCSS %}
-  <div class="{% className utilsCSS, 'aspect-ratio' %}" style="--aspect-ratio: calc(16/9)">
-    <iframe class="{% className utilsCSS, 'media-fill' %}" src="https://www.youtube.com/embed/XZcmtqL4JPI" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  <div class="{% className mediaCSS, 'media' %} {% className nowNextCSS, 'media' %}">
+    {%- set utilsCSS = "/_includes/utils.css" -%}
+    {% css page, utilsCSS %}
+    <div class="{% className utilsCSS, 'aspect-ratio' %} {% className nowNextCSS, 'livestream' %}" style="--aspect-ratio: calc(16/9)"></div>
   </div>
-{% endblock %}
-
-{% block after %}
-  <section class="{% className nowNextCSS, 'up-next' %}">
-    <h1>Up next ></h1>
-    <div><a href="#">HTML isn't done!</a></div>
-    <div>In 22 miunutes</div>
-  </section>
-{% endblock %}
+  <div class="{% className mediaCSS, 'main' %}">
+    <section class="{% className nowNextCSS, 'on-now' %}"></section>
+  </div>
+  <section class="{% className nowNextCSS, 'up-next' %}"></section>
+  <link rel="modulepreload" href="confboxAsset(/_includes/now-n-next/script/index.js)" />
+  <script type="module" async src="confboxAsset(/_includes/now-n-next/script/index.js)"></script>
+</section>

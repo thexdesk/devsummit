@@ -8,7 +8,7 @@
   <div class="{% className mediaCSS, 'main' %}">
     {% block main %}{% endblock %}
   </div>
-  <div class="{% className mediaCSS, 'media' %}">
+  <div class="{% block mediaClass %}{% className mediaCSS, 'media' %}{% endblock %}">
     {% block media %}{% endblock %}
   </div>
   {% block after %}{% endblock %}

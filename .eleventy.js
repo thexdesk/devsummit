@@ -22,6 +22,7 @@ function buildScheduleData(sessions, speakers, { basic = false } = {}) {
         title: session.data.title,
         speakers: session.data.speakers,
         session: true,
+        livestreamed: true,
         fileSlug: session.fileSlug,
       };
 
@@ -52,6 +53,8 @@ function buildScheduleData(sessions, speakers, { basic = false } = {}) {
           name: speaker.data.name,
           avatar: `confboxAsset(${speaker.data.avatar ||
             '/assets/speakers/default.svg'})`,
+          title: speaker.data.title,
+          link: speaker.data.link,
         };
       });
     }

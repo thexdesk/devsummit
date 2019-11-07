@@ -8,6 +8,8 @@ layout: '/layouts/session/wrapper'
   {% css page, moduleCSS %}
   {%- set sessionCSS = "/_includes/layouts/session/style.css" -%}
   {% css page, sessionCSS %}
+  {%- set speakerCSS = "/_includes/speakers.css" -%}
+  {% css page, speakerCSS %}
   {%- set css = "/_includes/content.css" -%}
   {% css page, css %}
   <div class="{% className moduleCSS, 'root-alt' %} {% className sessionCSS, 'root' %}">
@@ -31,12 +33,12 @@ layout: '/layouts/session/wrapper'
       <div class="{% className sessionCSS, 'text' %}">
         {{ content | safe }}
       </div>
-      <ul class="{% className sessionCSS, 'speakerlist' %}">
+      <ul class="{% className speakerCSS, 'speakerlist' %}">
         {% for speaker in speakers -%}
-          <li class="{% className sessionCSS, 'speaker' %}">
-            <img src="confboxAsset({% speakerAttr collections, speaker, "avatar", "/assets/speakers/default.svg" %})" class="{% className sessionCSS, 'speaker-avatar' %}" alt="">
-            <div class="{% className sessionCSS, 'speaker-creds' %}">
-              <div class="{% className sessionCSS, 'speaker-name' %}">
+          <li class="{% className speakerCSS, 'speaker' %}">
+            <img src="confboxAsset({% speakerAttr collections, speaker, "avatar", "/assets/speakers/default.svg" %})" class="{% className speakerCSS, 'speaker-avatar' %}" alt="">
+            <div class="{% className speakerCSS, 'speaker-creds' %}">
+              <div class="{% className speakerCSS, 'speaker-name' %}">
                 {% set link %}{% speakerAttr collections, speaker, "link", "" %}{% endset %}
                 {% if link %}
                   <a href="{{link}}" rel="noopener noreferrer" target="_blank">
@@ -46,7 +48,7 @@ layout: '/layouts/session/wrapper'
                   {% speakerAttr collections, speaker, "name" %}
                 {% endif %}
               </div>
-              <div class="{% className sessionCSS, 'speaker-title' %}">{% speakerAttr collections,
+              <div class="{% className speakerCSS, 'speaker-title' %}">{% speakerAttr collections,
                 speaker,
                 "title" %}</div>
             </div>
