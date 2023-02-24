@@ -11,7 +11,7 @@
     "serve": "superstatic --only hosting"
   },
   "devDependencies": {
-    "@11ty/eleventy": "^0.9.0",
+    "@11ty/eleventy": "^2.0.0",
     "cssnano": "^4.1.10",
     "date-and-time": "^0.10.0",
     "del-cli": "^3.0.0",
