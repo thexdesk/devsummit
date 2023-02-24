@@ -17,7 +17,7 @@
     "del-cli": "^3.0.0",
     "escape-string-regexp": "^2.0.0",
     "find-free-port": "^2.0.0",
-    "firebase-tools": "^7.6.2",
+    "firebase-tools": "^11.24.0",
     "glob": "^7.1.5",
     "html-minifier": "^4.0.0",
     "husky": "^3.0.9",
